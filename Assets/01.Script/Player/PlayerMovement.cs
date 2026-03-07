@@ -26,7 +26,7 @@ public class PlayerMovement : MonoBehaviour
     float verticalVelocity = 0f;
     bool isJumpPressed = false;
 
-    [SerializeField] float mouseSensitivity = 3f;
+    [SerializeField] float mouseSensitivity = 0.1f;
     [SerializeField] float clampFOV = 80f;
 
     // Start is called before the first frame update
@@ -38,15 +38,27 @@ public class PlayerMovement : MonoBehaviour
 
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
-        
     }
 
-    // Update is called once per frame
+    void Update()
+    {
+        if(InventoryManager.instance.isInventoryOpen())
+        {
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.Confined;
+        }
+        else
+        {
+            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
+            Look();
+        }
+    }
+
     void FixedUpdate()
     {
         ApplyGravity();
         Move();
-        Look();
     }
 
     void ApplyGravity()
@@ -77,8 +89,8 @@ public class PlayerMovement : MonoBehaviour
     }
     private void Look()
     {
-        yRotation += lookVec.x * mouseSensitivity * Time.deltaTime;
-        xRotation -= lookVec.y * mouseSensitivity * Time.deltaTime;
+        yRotation += lookVec.x * mouseSensitivity;
+        xRotation -= lookVec.y * mouseSensitivity;
 
         xRotation = Math.Clamp(xRotation , -clampFOV, clampFOV);
 

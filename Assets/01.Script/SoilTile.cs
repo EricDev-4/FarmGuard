@@ -30,19 +30,19 @@ public class SoilTile : MonoBehaviour
         gridSize = fieldSize.localScale.x / gridCount;
     }
 
-    void Update()
-    {
-        // Debug.DrawRay(InteractionCollider.transform.position, Vector3.down, Color.red, 100f);
-        if(Input.GetMouseButtonDown(0) && !clickFlag)
-        {
-            clickFlag = true;
-            plowingSoil();
-        }
-        else if(Input.GetMouseButtonUp(0))
-        {
-            clickFlag = false;
-        }
-    }
+    // void Update()
+    // {
+    //     // Debug.DrawRay(InteractionCollider.transform.position, Vector3.down, Color.red, 100f);
+    //     if(Input.GetMouseButtonDown(0) && !clickFlag)
+    //     {
+    //         clickFlag = true;
+    //         plowingSoil();
+    //     }
+    //     else if(Input.GetMouseButtonUp(0))
+    //     {
+    //         clickFlag = false;
+    //     }
+    // }
 
     // private void plowingSoil()
     // {
@@ -66,7 +66,7 @@ public class SoilTile : MonoBehaviour
     //         }
     //     }
     // }.
-    private void plowingSoil()
+    public void plowingSoil()
 {
     if (Physics.Raycast(InteractionCollider.transform.position, Vector3.down, out hitInfo, 100f))
     {
