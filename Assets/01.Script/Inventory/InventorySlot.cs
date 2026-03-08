@@ -17,7 +17,6 @@ public class InventorySlot : MonoBehaviour, IDropHandler
 
     public void Select()
     {
-        Debug.Log("Selceasd");
         image.color =  selectedColor;
     }
 

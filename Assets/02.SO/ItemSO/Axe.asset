@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4228438ba40532c40b438292289d913b, type: 3}
+  m_Name: Axe
+  m_EditorClassIdentifier: 
+  itemImage: {fileID: 21300000, guid: a1e1466e05891174c8aa1794cdd98177, type: 3}
+  stackable: 0
+  holdPrefab: {fileID: 135117285804915561, guid: 330417d772b050f46ba8b2b05ba5ed02, type: 3}
+  WorldPrefab: {fileID: 135117285804915561, guid: 842f3610c37b7094ebc12a252413499f, type: 3}
+  itemType: 0
+  actionType: 2

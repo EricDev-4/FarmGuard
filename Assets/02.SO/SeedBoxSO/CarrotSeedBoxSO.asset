@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6090951c20d3e1a44b6ce77a1e142175, type: 3}
+  m_Name: CarrotSeedBoxSO
+  m_EditorClassIdentifier: 
+  itemImage: {fileID: 21300000, guid: 5c1401eacbe05254fbec8c66107fff46, type: 3}
+  stackable: 0
+  holdPrefab: {fileID: 5424463677175864017, guid: 3a719a51778d55b46a67bb134b90b19f, type: 3}
+  seedPrefab: {fileID: 8977622456116345438, guid: fa0fa6bc0a4e59745aed4e1ef81390e7, type: 3}

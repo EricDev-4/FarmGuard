@@ -8,7 +8,7 @@ public class InventoryManager : MonoBehaviour
     public static InventoryManager instance; 
 
 
-    public List<ItemSO> itemList = new List<ItemSO>();
+    public List<BaseItemSO> itemList = new List<BaseItemSO>();
     public int maxStackedItems = 10;
     public InventorySlot[] inventorySlots;
     public GameObject inventoryItemPrefab;
@@ -53,7 +53,7 @@ public class InventoryManager : MonoBehaviour
     }
 
 
-    public void AddItem(ItemSO item)
+    public void AddItem(BaseItemSO item)
     {
         for (int i = 0; i < inventorySlots.Length; i++)
         {
@@ -86,7 +86,7 @@ public class InventoryManager : MonoBehaviour
     } 
 
 
-    void AddNewItem(ItemSO item , InventorySlot slot)
+    void AddNewItem(BaseItemSO item , InventorySlot slot)
     {
         itemList.Add(item);
         GameObject newItemGo = Instantiate(inventoryItemPrefab , slot.transform);

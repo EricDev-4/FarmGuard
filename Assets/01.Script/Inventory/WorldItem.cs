@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class WorldItem : MonoBehaviour
 {
-    public ItemSO itemSO;
+    public BaseItemSO itemSO;
 
     void OnTriggerEnter(Collider other)
     {

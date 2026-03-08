@@ -10,6 +10,19 @@ public class Player : MonoBehaviour
     [SerializeField] private Transform weaponHolder; // 손 위치 빈 오브젝트
 
     [SerializeField] private int currentSlot;
+
+
+    
+    // TODO: 나중에 Crops 스크립트로 옮기기
+    [Header("Crops")]
+    RaycastHit hitInfo;
+    Ray ray;
+    [SerializeField] float rayDistance;
+    [SerializeField] Transform[] crops;
+    [SerializeField] int cropsIndex = 1;
+
+
+
     private GameObject equippedWeapon;
     private InventoryItem inventoryItem;
 
@@ -34,11 +47,50 @@ public class Player : MonoBehaviour
         EquipSelectedWeapon();
 
         HandlePlowInput();
+
+        if(Input.GetMouseButtonDown(1))
+            PlantCrop();
     }
+
+        private void EquipSelectedWeapon()
+        {
+            int currentSlot = InventoryManager.instance.selectedSlot;
+
+            if (currentSlot == lastSelectedSlot) return;
+
+            lastSelectedSlot = currentSlot;
+
+            foreach (Transform child in weaponHolder)
+                Destroy(child.gameObject);
+
+            if (currentSlot < 0) return;
+
+            inventoryItem = InventoryManager.instance.inventorySlots[currentSlot]
+                .GetComponentInChildren<InventoryItem>();
+
+            BaseItemSO baseItemSO = inventoryItem.item;
+            if(baseItemSO != null)
+            {
+                // if(baseItemSO is ItemSO itemSO)
+                // {
+                //     Instantiate(itemSO.ItemPrefab, weaponHolder);
+                // }
+                // else if(baseItemSO is CropsSO cropsSO)
+                // {
+                //     Instantiate(cropsSO.CropsPrefab, weaponHolder);
+                // }
+                // else if(baseItemSO is SeedBoxSO seedBoxSO)
+                // {
+                //     Instantiate(seedBoxSO.Seedbox, weaponHolder);
+                // }
+                Instantiate(baseItemSO.holdPrefab, weaponHolder);
+            }
+        }
 
     private void HandlePlowInput()
     {
-        bool isHoe = inventoryItem != null && inventoryItem.item.actionType == ItemSO.ActionType.Hoe;
+        ItemSO itemSO = inventoryItem?.item as ItemSO;
+        bool isHoe = itemSO != null && itemSO.actionType == ItemSO.ActionType.Hoe;
 
         if (Input.GetMouseButtonDown(0) && !clickFlag)
         {
@@ -57,27 +109,34 @@ public class Player : MonoBehaviour
             clickFlag = false;
         }
     }
-
-    private void EquipSelectedWeapon()
+    private void PlantCrop()
     {
-        int currentSlot = InventoryManager.instance.selectedSlot;
+       
+        ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-        if (currentSlot == lastSelectedSlot) return;
-
-        lastSelectedSlot = currentSlot;
-
-        foreach (Transform child in weaponHolder)
-            Destroy(child.gameObject);
-
-        if (currentSlot < 0) return;
-
-        inventoryItem = InventoryManager.instance.inventorySlots[currentSlot]
-            .GetComponentInChildren<InventoryItem>();
-
-        if (inventoryItem != null && inventoryItem.item.ItemPrefab != null)
+        Physics.Raycast(ray, out hitInfo , rayDistance);
+        if(hitInfo.transform == null) return;
+        SeedBoxSO seedBoxSO = inventoryItem.item as SeedBoxSO;
+        if(seedBoxSO != null && hitInfo.transform.tag == "DrySoil" && hitInfo.transform.childCount == 0)
         {
-            Instantiate(inventoryItem.item.ItemPrefab, weaponHolder);
-        }
+            crops = seedBoxSO.seedPrefab.GetComponentsInChildren<Transform>(true);
+            foreach(Transform transform in crops)
+            {
+                transform.gameObject.SetActive(false);
+            }
+            crops[cropsIndex].gameObject.SetActive(true);
+            Transform temp = Instantiate(crops[0] ,hitInfo.transform);
+            temp.gameObject.SetActive(true);
+        }  
     }
 
+    private void WaterCrop()
+    {
+        if(hitInfo.transform != null && hitInfo.transform.tag == "DrySoil")
+        {
+            
+        }
+    }
 }
+
+

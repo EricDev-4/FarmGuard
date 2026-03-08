@@ -7,17 +7,17 @@ using TMPro;
 
 public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
-    [HideInInspector] public ItemSO item;
-    [HideInInspector] public int count = 1;
-    [HideInInspector] public Transform originalParent;
+    public BaseItemSO item;
+    public int count = 1;
+     public Transform originalParent;
     
     public Image image;
     public TextMeshProUGUI countText;
 
-    public void InitaliseItem(ItemSO newItem)
+    public void InitaliseItem(BaseItemSO newItem)
     {  
         item = newItem;
-        image.sprite = newItem.image;
+        image.sprite = newItem.itemImage;
         // RefreshCount();
     }
 
