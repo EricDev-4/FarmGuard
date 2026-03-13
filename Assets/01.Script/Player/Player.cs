@@ -24,7 +24,7 @@ public class Player : MonoBehaviour
 
 
     private GameObject equippedWeapon;
-    private InventoryItem inventoryItem;
+    [SerializeField] private InventoryItem inventoryItem;
 
     [SerializeField] Collider interactionCol;
     private int lastSelectedSlot = -1;
@@ -49,7 +49,10 @@ public class Player : MonoBehaviour
         HandlePlowInput();
 
         if(Input.GetMouseButtonDown(1))
+        {
             PlantCrop();
+            WaterCrop();
+        }
     }
 
         private void EquipSelectedWeapon()
@@ -111,13 +114,16 @@ public class Player : MonoBehaviour
     }
     private void PlantCrop()
     {
-       
+        if(inventoryItem == null || inventoryItem.item == null) return;
+
+        SeedBoxSO seedBoxSO = inventoryItem.item as SeedBoxSO;
+        if(seedBoxSO == null) return;
+
         ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
         Physics.Raycast(ray, out hitInfo , rayDistance);
         if(hitInfo.transform == null) return;
-        SeedBoxSO seedBoxSO = inventoryItem.item as SeedBoxSO;
-        if(seedBoxSO != null && hitInfo.transform.tag == "DrySoil" && hitInfo.transform.childCount == 0)
+        if(hitInfo.transform.tag == "DrySoil" && hitInfo.transform.childCount == 0)
         {
             crops = seedBoxSO.seedPrefab.GetComponentsInChildren<Transform>(true);
             foreach(Transform transform in crops)
@@ -127,14 +133,23 @@ public class Player : MonoBehaviour
             crops[cropsIndex].gameObject.SetActive(true);
             Transform temp = Instantiate(crops[0] ,hitInfo.transform);
             temp.gameObject.SetActive(true);
+            crops = null;
         }  
     }
 
     private void WaterCrop()
     {
-        if(hitInfo.transform != null && hitInfo.transform.tag == "DrySoil")
+        ItemSO itemSO = inventoryItem?.item as ItemSO;
+        bool isWateringCan = itemSO != null && itemSO.actionType == ItemSO.ActionType.WateringCan;
+
+        if(!isWateringCan) return;
+
+        ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        Physics.Raycast(ray, out hitInfo, rayDistance);
+
+        if(hitInfo.transform != null && hitInfo.transform.CompareTag("DrySoil"))
         {
-            
+            soilTile.wateringSoil(hitInfo.transform);
         }
     }
 }

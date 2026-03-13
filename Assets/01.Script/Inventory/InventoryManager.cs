@@ -29,12 +29,20 @@ public class InventoryManager : MonoBehaviour
         {
             inventoryTab.gameObject.SetActive(!inventoryTab.gameObject.activeSelf);   
         }
-        if(Input.inputString != null)
-        {
-            bool isNumber = int.TryParse(Input.inputString, out int number);
-            if(isNumber && number > 0 && number < 8)
-                ChangedSelectedSlot(number -1);
-        }
+        if(Input.GetKeyDown(KeyCode.Alpha1) || Input.GetKeyDown(KeyCode.Keypad1))
+            ChangedSelectedSlot(0);
+        else if(Input.GetKeyDown(KeyCode.Alpha2) || Input.GetKeyDown(KeyCode.Keypad2))
+            ChangedSelectedSlot(1);
+        else if(Input.GetKeyDown(KeyCode.Alpha3) || Input.GetKeyDown(KeyCode.Keypad3))
+            ChangedSelectedSlot(2);
+        else if(Input.GetKeyDown(KeyCode.Alpha4) || Input.GetKeyDown(KeyCode.Keypad4))
+            ChangedSelectedSlot(3);
+        else if(Input.GetKeyDown(KeyCode.Alpha5) || Input.GetKeyDown(KeyCode.Keypad5))
+            ChangedSelectedSlot(4);
+        else if(Input.GetKeyDown(KeyCode.Alpha6) || Input.GetKeyDown(KeyCode.Keypad6))
+            ChangedSelectedSlot(5);
+        else if(Input.GetKeyDown(KeyCode.Alpha7) || Input.GetKeyDown(KeyCode.Keypad7))
+            ChangedSelectedSlot(6);
 
 
         // if(selectedSlot >= 0 && inventorySlots[selectedSlot].GetComponentInChildren<InventoryItem>() != null)

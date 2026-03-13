@@ -29,43 +29,6 @@ public class SoilTile : MonoBehaviour
         InteractionCollider =  GetComponentInChildren<SphereCollider>();
         gridSize = fieldSize.localScale.x / gridCount;
     }
-
-    // void Update()
-    // {
-    //     // Debug.DrawRay(InteractionCollider.transform.position, Vector3.down, Color.red, 100f);
-    //     if(Input.GetMouseButtonDown(0) && !clickFlag)
-    //     {
-    //         clickFlag = true;
-    //         plowingSoil();
-    //     }
-    //     else if(Input.GetMouseButtonUp(0))
-    //     {
-    //         clickFlag = false;
-    //     }
-    // }
-
-    // private void plowingSoil()
-    // {
-    //     if (Physics.Raycast(InteractionCollider.transform.position, Vector3.down, out hitInfo, 100f))
-    //     {
-
-    //         if (hitInfo.collider.CompareTag(Tags.TillableSoil))
-    //         {
-    //             // Debug.Log(hitInfo.point);
-    //             Vector3 point = hitInfo.point;
-    //             Vector3 snappedPosition = new Vector3(
-    //                 Mathf.Round(point.x/ gridSize) * gridSize,
-    //                 (Mathf.Round(point.y/ gridSize) * gridSize) + 0.01f,
-    //                 Mathf.Round(point.z/ gridSize) * gridSize
-    //             );
-    //             Vector3 GroundPos = hitInfo.transform.localScale;
-
-    //             Debug.Log(snappedPosition);
-
-    //             Instantiate(prefabs[((int)soil.DrySoil)], snappedPosition, Quaternion.identity);
-    //         }
-    //     }
-    // }.
     public void plowingSoil()
 {
     if (Physics.Raycast(InteractionCollider.transform.position, Vector3.down, out hitInfo, 100f))
@@ -91,6 +54,26 @@ public class SoilTile : MonoBehaviour
         }
     }
 }
+    public void wateringSoil(Transform targetSoil)
+    {
+        // targetSoil의 위치, 스케일, 자식(작물) 저장
+        Vector3 position = targetSoil.position;
+        Vector3 scale = targetSoil.localScale;
+        List<Transform> children = new List<Transform>();
+        foreach(Transform child in targetSoil)
+            children.Add(child);
+
+        // 기존 DrySoil 삭제
+        Destroy(targetSoil.gameObject);
+
+        // WetMud 프리팹 생성
+        GameObject wetSoil = Instantiate(prefabs[(int)soil.WetMud], position, Quaternion.identity);
+        wetSoil.transform.localScale = scale;
+
+        // 자식(작물) 다시 붙이기
+        foreach(Transform child in children)
+            child.SetParent(wetSoil.transform);
+    }
 
     #if UNITY_EDITOR
 private void OnDrawGizmos()
