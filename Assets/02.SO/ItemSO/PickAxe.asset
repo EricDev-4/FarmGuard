@@ -18,3 +18,4 @@ MonoBehaviour:
   WorldPrefab: {fileID: 2056592042668887030, guid: c0838661570eccf44adab06655b02f84, type: 3}
   itemType: 0
   actionType: 3
+  Damage: 3

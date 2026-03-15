@@ -7,7 +7,7 @@ public class ItemSO : BaseItemSO
     public GameObject WorldPrefab;
     public ItemType itemType;
     public ActionType actionType;
-
+    public float Damage;
     public enum ItemType
     {
         Tool,

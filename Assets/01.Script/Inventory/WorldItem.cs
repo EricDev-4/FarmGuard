@@ -1,19 +1,14 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
-using UnityEditor.MPE;
 using UnityEngine;
 
 public class WorldItem : MonoBehaviour
 {
     public BaseItemSO itemSO;
 
-    void OnTriggerEnter(Collider other)
+    public void Pickup()
     {
-        if(other.transform.CompareTag("Player"))
-        {
-            InventoryManager.instance.AddItem(itemSO);
-            Destroy(gameObject);
-        }
+        InventoryManager.instance.AddItem(itemSO);
+        Destroy(gameObject);
     }
 }
+
+// WorldItem 에 RockSO 만들어서 넣기

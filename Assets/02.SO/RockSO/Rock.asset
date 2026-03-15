@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d45051e9398a36f4fb26cd9c7ca0f0fd, type: 3}
+  m_Name: Rock
+  m_EditorClassIdentifier: 
+  itemImage: {fileID: 21300000, guid: cee99313a48e0c8479b3e64372e63673, type: 3}
+  stackable: 1
+  holdPrefab: {fileID: 2730381812996152265, guid: e15e60ad73c42a1479cce1591eacffec, type: 3}
+  rockName: Rock
+  maxHealth: 7
+  rockCellPrefab: {fileID: 6593840283814943738, guid: df5cf918c22afe4409de501d008eef2e, type: 3}
+  rockCellLifetime: 0.5
+  rockItemPrefab: {fileID: 2730381812996152265, guid: 303c35b2d5e7f6745afbf5d34bb914d9, type: 3}

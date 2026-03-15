@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,11 +8,14 @@ public class GameManager : MonoBehaviour
         // 싱글톤
     public static GameManager Instance { get; private set; }
 
+    public static event Action OnDayChanged;
+
     public int Day;
 
     public void UpdateDay()
     {
         Day++;
+        OnDayChanged?.Invoke();
     }
 
     void Awake()

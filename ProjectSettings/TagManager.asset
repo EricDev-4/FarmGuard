@@ -9,6 +9,9 @@ TagManager:
   - WetSoil
   - w_Weapon
   - Hoe
+  - DrySoil
+  - Tree
+  - Rock
   layers:
   - Default
   - TransparentFX
