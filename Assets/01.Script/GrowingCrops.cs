@@ -17,25 +17,23 @@ public class GrowingCrops : MonoBehaviour
                 currentActiveIndex = i;
             }
             // return -1; // 활성화된 crop이 없으면 -1 반환
-            // currentActiveIndex = -1;
+            currentActiveIndex = -1;
     }
 
     void Start()
     {
         currentSoil = GetComponentInParent<Transform>();
         crops = GetComponentsInChildren<Transform>(true);
-        GameManager.OnDayChanged += GrowingCrop;
-        ActiveCropIndex();
-    }
-
-    void OnDestroy()
-    {
-        GameManager.OnDayChanged -= GrowingCrop;
     }
 
     void Update()
     {
+        ActiveCropIndex();
         
+        // if(currentSoil.CompareTag("WetSoil") && )
+        {
+            
+        }
     }
 
     private void GrowingCrop()
